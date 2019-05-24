@@ -3,44 +3,30 @@ require('FonctionUtilisateur.php');
 $resD = RecupererLesNomDeDomaines();
 $resF = RecupererNomFormation();
 
+// Récupération du nom de la personne connectée
 $Nom = $_SESSION['Nom'];
 $Prenom= $_SESSION['Prenom'];
-if(!empty($_GET)){
-       $IdEns= $_GET['IdEns'];
-       $PrenomEns= $_GET['PrenomEns'];
-       $NomEns= $_GET['NomEns'];
-       $TypeEns= $_GET['Statut'];
-       $IdDomaine= $_GET['IdDomaine'];
-       $MdpEns= $_GET['MdpEns'];
-       $InsererEnseignant = InsererEnseignant ($MdpEns,$IdEns,$NomEns,$PrenomEns,$TypeEns,$IdDomaine);
-       header('Location:'.$InsererEnseignant);
- }
- if(!empty($_GET)){
-       $IdE= $_GET['IdE'];
-       $PrenomE= $_GET['PrenomE'];
-       $NomE= $_GET['NomE'];
-       $IdF= $_GET['IdF'];
-       $MdpE= $_GET['MdpE'];
-       $InsererEtudiant = InsererEtudiant ($MdpE,$IdE,$NomE,$PrenomE,$IdF);
-       header('Location:'.$InsererEtudiant);
- }
-  if(!empty($_GET)){
-       $IdA= $_GET['IdA'];
-       $PrenomA= $_GET['PrenomA'];
-       $NomA= $_GET['NomA'];
-       $StatutA= $_GET['StatutA'];
-       $MdpA= $_GET['MdpA'];
-       $InsererAdmin =InsererAdminGest ($MdpA,$IdA,$NomA,$PrenomA,$StatutA);
-       header('Location:'.  $InsererAdmin);
-       
+
+
+
+ if(isset($_GET['IdEnsModif'])){
+     $IdEns= $_GET['IdEnsModif'];
+     $resinfo=RecuperInfoEns ($IdEns);
+     
+     for($i=0;$i<=count($resinfo)-1;$i++){
+
+        $PrenomEns= $resinfo[$i]['PrenomEns'];
+        $NomEns= $resinfo[$i]['NomEns'];
+        $TypeEns=$resinfo[$i]['TypeEns'];
+        $NomDomaine=$resinfo[$i]['Intitule_domaine'];
+        $MdpEns= $resinfo[$i]['Mdp'];   
+        
+      
+
+    }                     
  }
 ?>
 
-<!--<pre>-->
-    <?php
-        //var_dump($res);
-    ?>
-<!--</pre>-->
 
 <html lang="en">
     <head>
@@ -53,7 +39,7 @@ if(!empty($_GET)){
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../public/style.css">
+        <link rel="stylesheet" href="style.css">
         <script src="javascript.js"></script>
         <title>Title of the document</title>
     </head>
@@ -63,11 +49,11 @@ if(!empty($_GET)){
             <div class="navbar-header">
                 <img src="logo.JPG" alt="Logo" style="width:52px;">
             </div>
-            <a href="../homeAdmin.html">Accueil</a>
+            <a href="homeAdmin.php">Accueil</a>
             <div class="subnav">
                 <button class="subnavbtn">Création &nbsp;<i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                <a href="creationUtilisateurs.html">Utilisateurs</a>
+                <a href="CreerUtilisateur.php">Utilisateurs</a>
                 <a href="#company">Formations</a>
                 <a href="#company">Salles</a>
                 <a href="#company">Matériels</a>
@@ -78,7 +64,7 @@ if(!empty($_GET)){
             <div class="subnav">
                 <button class="subnavbtn">Gestion &nbsp;<i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                    <a href="gestionUtilisateurs.html">Utilisateurs</a>
+                    <a href="GestionUtilisateur.php">Utilisateurs</a>
                     <a href="#company">Formations</a>
                     <a href="#company">Salles</a>
                     <a href="#company">Matériels</a>
@@ -95,10 +81,13 @@ if(!empty($_GET)){
                 </div>
             </div>
             <div class="subnav2">
-                <a href = "../index.php" class="subnavbtn2">Deconnection&nbsp;<span class="glyphicon glyphicon-log-in"></span></a>
+                <a href = "index.php" class="subnavbtn2">Deconnection&nbsp;<span class="glyphicon glyphicon-log-in"></span></a>
             </div>
             <div class="subnav2">
-                <button class="subnavbtn3"><span class="glyphicon glyphicon-user"></span>&nbsp;<?php$Nom." "$Prenom ?></button>
+                <button class="subnavbtn3"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php
+       
+        echo($Nom." ".$Prenom);
+        ?></button>
             </div>
         </div>
         
@@ -126,10 +115,10 @@ if(!empty($_GET)){
             <br>
             <h4>Insertion simple</h4>
             <br>
-            <form action="">
+            <form action="FonctionUtilisateur.php">
                 <div class="form-group">
                   <label for="email">Numéro étudiant:</label>
-                  <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdE" required="">
+                  <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdE" required="" >
                 </div>
                 <div class="form-group">
                   <label for="pwd">Nom:</label>
@@ -181,39 +170,43 @@ if(!empty($_GET)){
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
                 <br>
-                <form action="">
+                <form action="FonctionUtilisateur.php">
                   <div class="form-group">
                     <label for="email">Numéro enseignants</label>
-                    <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdEns" required="">
+                    <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdEns" required="" value ='<?php echo $IdEns ?>'>
                   </div>
                   <div class="form-group">
                       <label for="email">Nom</label>
-                      <input type="text" class="form-control" id="email" placeholder="Nom..." name="NomEns" required="">
+                      <input type="text" class="form-control" id="email" placeholder="Nom..." name="NomEns" required="" value ='<?php echo $NomEns?>' >
                   </div>
                   <div class="form-group">
                       <label for="email">Prénom</label>
-                      <input type="text" class="form-control" id="email" placeholder="Prénom..." name="PrenomEns"required="" >
+                      <input type="text" class="form-control" id="email" placeholder="Prénom..." name="PrenomEns" required="" value ='<?php echo $PrenomEns ?>' >
                   </div>
                   <div class="form-group">
                       <label for="email">Mot de passe</label>
-                      <input type="text" class="form-control" id="email" placeholder="mot de passe..." name="MdpEns" required="">
+                      <input type="text" class="form-control" id="email" placeholder="mot de passe..." name="MdpEns" required="" value ='<?php echo $MdpEns ?>'>
                   </div> 
                   <div class="form-group">
                       <label for="email">Statut</label>
                       <select class="form-control" id="sel1" name ="Statut" required="">
                           <option>Choisir Statut..</option>
-                          <option value ="Enseignant">Enseignant</option>
-                          <option value="Intervenant exterieur">Intervenant exterieur</option>
+                          <?php 
+                          if($TypeEns == "Enseignant"){ $selectEns= "Selected"; $selectInt =""; }else { $selectEns="" ; $selectInt ="Selected"; }?>
+                          <option value ="Enseignant" <?php echo $selectEns?>> Enseignant</option>
+                          <option value ="Intervenant exterieur" <?php echo $selectInt?>>Intervenant exterieur</option>
                         </select>
                   </div>
                   <div class="form-group">
                       <label for="email" >Domaine</label>
                       <select class="form-control" id="sel1" name="IdDomaine" required="">
                           <option>Choisir un domaine de compétence</option>
-                         <?php             
+                         <?php 
+                          
                 for($i=0;$i<=count($resD)-1;$i++){
             ?>
-                          <Option value ="<?php echo $resD[$i]['IdDomaine'] ?>"><?php echo $resD[$i]['intitule_domaine'] ?></option>     
+                          
+                          <Option <?php  if($resD[$i]['Intitule_domaine'] == $NomDomaine){ echo "Selected"; } ?> value ="<?php echo $resD[$i]['IdDomaine'] ?>"><?php echo $resD[$i]['Intitule_domaine'] ?></option>     
             <?php
                 }
             ?>
@@ -231,7 +224,7 @@ if(!empty($_GET)){
           <div class="col-sm-4"></div>
           <div class="col-sm-4">
               <br>
-              <form action="">
+              <form action="FonctionUtilisateur.php">
                 <div class="form-group">
                   <label for="email">Numéro superUser</label>
                   <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdA">
@@ -256,7 +249,8 @@ if(!empty($_GET)){
                         <option value ='Administrateur'>Administrateur</option>
                       </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Créer</button>                  
+                <button type="submit" class="btn btn-primary btn-block">Créer</button>          
+                
               </form>
           </div>
           <div class="col-sm-4"></div>

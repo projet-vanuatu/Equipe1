@@ -40,7 +40,7 @@ $ID = $_SESSION['ID'] ;
             <div class="subnav">
               <button class="subnavbtn">Gestion &nbsp;<i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                  <a href="Admin/gestionUtilisateurs.html">Utilisateurs</a>
+                  <a href="GestionUtilisateur.php">Utilisateurs</a>
                   <a href="#company">Formations</a>
                   <a href="#company">Salles</a>
                   <a href="#company">Matériels</a>
@@ -68,7 +68,8 @@ $ID = $_SESSION['ID'] ;
         </div>
       
     <footer class="container-fluid">
-        
+             <?php $nompage =  $_SERVER['HTTP_REFERER'];
+             echo $nompage;?>
     </footer>
 
 
