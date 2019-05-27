@@ -29,10 +29,10 @@ $ID = $_SESSION['ID'] ;
             <div class="subnav">
               <button class="subnavbtn">Création &nbsp;<i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="CreerUtilisateur.php">Utilisateurs</a>
+                  <a href="CreerUtilisateur.php?action=creer">Utilisateurs</a>
                 <a href="#company">Formations</a>
                 <a href="#company">Salles</a>
-                <a href="#company">Matériels</a>
+                <a href="CreerMateriel.php?action=creer">Matériels</a>
                 <a href="#company">Unités d'enseignements</a>
                 <a href="#company">Matières</a>
               </div>
@@ -42,7 +42,7 @@ $ID = $_SESSION['ID'] ;
               <div class="subnav-content">
                   <a href="GestionUtilisateur.php">Utilisateurs</a>
                   <a href="#company">Formations</a>
-                  <a href="#company">Salles</a>
+                  <a href="GestionMateriel.php">Salles</a>
                   <a href="#company">Matériels</a>
                   <a href="#company">Unités d'enseignements</a>
                   <a href="#company">Matières</a>

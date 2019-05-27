@@ -32,10 +32,10 @@
             <div class="subnav">
                 <button class="subnavbtn">Création &nbsp;<i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                <a href="CreerUtilisateur.php">Utilisateurs</a>
+                <a href="CreerUtilisateur.php?action=creer">Utilisateurs</a>
                 <a href="#company">Formations</a>
                 <a href="#company">Salles</a>
-                <a href="#company">Matériels</a>
+                <a href="CreerMateriel.php?action=creer">Matériels</a>
                 <a href="#company">Unités d'enseignements</a>
                 <a href="#company">Matières</a>
                 </div>
@@ -45,8 +45,8 @@
                 <div class="subnav-content">
                     <a href="GestionUtilisateur.php">Utilisateurs</a>
                     <a href="#company">Formations</a>
-                    <a href="#company">Salles</a>
-                    <a href="#company">Matériels</a>
+                    <a href="">Salles</a>
+                    <a href="GestionMateriel.php">Matériels</a>
                     <a href="#company">Unités d'enseignements</a>
                     <a href="#company">Matières</a>
                 </div>
@@ -98,7 +98,7 @@
                     <input type="text" class="form-control" id="myInput" onkeyup="myFunction();" placeholder="Rechercher.." title="">
                 </div>
                 <div class="col-sm-4">
-                    <a href = "CreerUtilisateur.php"><button type="button" class="btn btn-primary">Créer étudiant</button></a>
+                    <a href = "CreerUtilisateur.php?action=creer"><button type="button" class="btn btn-primary">Créer étudiant</button></a>
                 </div>
             </div>
 
@@ -127,7 +127,7 @@
                             <td><?php echo  $resListEtu[$i]['PrenomE'] ?></td>
                             <td><?php echo  $resListEtu[$i]['IntituleF'] ?></td>
                             <td><?php echo  $resListEtu[$i]['NumGroupCM'] ?></td>
-                            <td><p><a href = "CreerUtilisateur.php"> <button type="button" class="btn btn-warning">Modifier</button></a>
+                            <td><p><a href =  "<?php echo "CreerUtilisateur.php?action=modifier&IdEtuModif=".$resListEtu[$i]['IdE']; ?>"> <button type="button" class="btn btn-warning">Modifier</button></a>
                                     <a href ="<?php echo "ActionUtilisateur.php?IdESupp=".$resListEtu[$i]['IdE']."&Type=SupprimerEtudiant&IdMdp=".$resListEtu[$i]['IdMdp']; ?>"> <button type="button" class="btn btn-danger">Supprimer</button></a></p></td>
                         </tr>
             <?php
@@ -172,7 +172,7 @@
                             <td><?php echo  $resListEns[$i]['PrenomEns'] ?></td>
                             <td><?php echo  $resListEns[$i]['TypeEns'] ?></td>
                             <td><?php echo  $resListEns[$i]['Intitule_domaine'] ?></td>
-                            <td><p><a href = "<?php echo "CreerUtilisateur.php?IdEnsModif=".$resListEns[$i]['IdEns']; ?>"> <button type="button" class="btn btn-warning" value ='<?php echo  $resListEns[$i]['IdEns'] ?>'>Modifier</button></a>
+                            <td><p><a href = "<?php echo "CreerUtilisateur.php?action=modifier&IdEnsModif=".$resListEns[$i]['IdEns']; ?>"> <button type="button" class="btn btn-warning" value ='<?php echo  $resListEns[$i]['IdEns'] ?>'>Modifier</button></a>
                                     <a href ="<?php echo "ActionUtilisateur.php?IdESupp=".$resListEns[$i]['IdEns']."&Type=SupprimerEnseignant&IdMdp=".$resListEns[$i]['IdMdp']; ?>"><button type="button" class="btn btn-danger" value ='<?php echo  $resListEns[$i]['IdEns'] ?>'>Supprimer</button></a></p></td>
                         </tr>
             <?php
@@ -213,7 +213,7 @@
                                        <td><?php echo  $resListAdmin[$i]['NomA'] ?></td>
                                        <td><?php echo  $resListAdmin[$i]['PrenomA'] ?></td>
                                        <td><?php echo  $resListAdmin[$i]['StatutA'] ?></td>
-                                       <td><p><a href = "CreerUtilisateur.php"><button type="button" class="btn btn-warning" value ='<?php echo  $resListAdmin[$i]['IdA'] ?>'>Modifier</button></a>
+                                       <td><p><a href = <?php echo "CreerUtilisateur.php?action=modifier&IdAdModif=".$resListAdmin[$i]['IdA']; ?>><button type="button" class="btn btn-warning" value ='<?php echo  $resListAdmin[$i]['IdA'] ?>'>Modifier</button></a>
                                                <a href ="<?php echo "ActionUtilisateur.php?IdESupp=".$resListAdmin[$i]['IdA']."&Type=SupprimerAdmin&IdMdp=".$resListAdmin[$i]['IdMdp']; ?>"><button type="button" class="btn btn-danger" value ='<?php echo  $resListAdmin[$i]['IdA'] ?>'>Supprimer</button></a></p></td>
                                    </tr>
                                     <?php

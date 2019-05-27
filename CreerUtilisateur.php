@@ -7,7 +7,7 @@ $resF = RecupererNomFormation();
 $Nom = $_SESSION['Nom'];
 $Prenom= $_SESSION['Prenom'];
 
-
+$action =$_GET['action'];
 
  if(isset($_GET['IdEnsModif'])){
      $IdEns= $_GET['IdEnsModif'];
@@ -23,8 +23,58 @@ $Prenom= $_SESSION['Prenom'];
         
       
 
-    }                     
- }
+    }  
+ }else {
+        $PrenomEns= "";
+        $NomEns= "";
+        $TypeEns="";
+        $NomDomaine="";
+        $MdpEns=  "";
+        $IdEns= "";
+    } 
+if(isset($_GET['IdEtuModif'])){
+ $IdE= $_GET['IdEtuModif'];
+ $resinfoEtu= RecuperInfoEtu ($IdE);
+
+ for($i=0;$i<=count($resinfoEtu)-1;$i++){
+
+    $PrenomE= $resinfoEtu[$i]['PrenomE'];
+    $NomE=$resinfoEtu[$i]['NomE'];
+    $IdF=$resinfoEtu[$i]['IdF'];
+    $MdpE=$resinfoEtu[$i]['Mdp'];
+
+
+
+}  
+ }else {
+        $PrenomE ="";
+        $NomE= "";
+        $IdF="";
+        $MdpE=  "";
+        $IdE= "";
+    }  
+if(isset($_GET['IdAdModif'])){
+ $IdA= $_GET['IdAdModif'];
+ $resinfoAd= RecuperInfoAd($IdA);
+
+ for($i=0;$i<=count($resinfoAd)-1;$i++){
+
+    $PrenomA= $resinfoAd[$i]['PrenomA'];
+    $NomA=$resinfoAd[$i]['NomA'];
+    $StatutA=$resinfoAd[$i]['StatutA'];
+    $MdpA=$resinfoAd[$i]['Mdp'];
+
+
+
+}  
+ }else {
+        $PrenomA ="";
+        $NomA= "";
+        $IdA="";
+        $MdpA=  "";
+        $StatutA= "";
+       
+    }   
 ?>
 
 
@@ -53,10 +103,10 @@ $Prenom= $_SESSION['Prenom'];
             <div class="subnav">
                 <button class="subnavbtn">Création &nbsp;<i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                <a href="CreerUtilisateur.php">Utilisateurs</a>
+                <a href="CreerUtilisateur.php?action=creer">Utilisateurs</a>
                 <a href="#company">Formations</a>
                 <a href="#company">Salles</a>
-                <a href="#company">Matériels</a>
+                <a href="CreerMateriel.php?action=creer">Matériels</a>
                 <a href="#company">Unités d'enseignements</a>
                 <a href="#company">Matières</a>
                 </div>
@@ -66,8 +116,8 @@ $Prenom= $_SESSION['Prenom'];
                 <div class="subnav-content">
                     <a href="GestionUtilisateur.php">Utilisateurs</a>
                     <a href="#company">Formations</a>
-                    <a href="#company">Salles</a>
-                    <a href="#company">Matériels</a>
+                    <a href="">Salles</a>
+                    <a href="GestionMateriel.php">Matériels</a>
                     <a href="#company">Unités d'enseignements</a>
                     <a href="#company">Matières</a>
                 </div>
@@ -84,10 +134,7 @@ $Prenom= $_SESSION['Prenom'];
                 <a href = "index.php" class="subnavbtn2">Deconnection&nbsp;<span class="glyphicon glyphicon-log-in"></span></a>
             </div>
             <div class="subnav2">
-                <button class="subnavbtn3"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php
-       
-        echo($Nom." ".$Prenom);
-        ?></button>
+                <button class="subnavbtn3"><span class="glyphicon glyphicon-user"></span>&nbsp;<?php echo($Nom." ".$Prenom);?></button>
             </div>
         </div>
         
@@ -97,10 +144,10 @@ $Prenom= $_SESSION['Prenom'];
         <div class="container">
             <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link acstive" onclick="afficherEtudiant();">Etudiants</a>
+                        <a class="nav-link acstive " onclick="afficherEtudiant();">Etudiants</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="afficherEnseignant();">Enseignants</a>
+                        <a class="nav-link  " onclick="afficherEnseignant();">Enseignants</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onclick="afficherGestionnaire();">Administrateurs/Gestionnaires</a>
@@ -115,18 +162,18 @@ $Prenom= $_SESSION['Prenom'];
             <br>
             <h4>Insertion simple</h4>
             <br>
-            <form action="FonctionUtilisateur.php">
+            <form action="ActionUtilisateur.php">
                 <div class="form-group">
                   <label for="email">Numéro étudiant:</label>
-                  <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdE" required="" >
+                  <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdE" required="" value ='<?php echo $IdE ?>' >
                 </div>
                 <div class="form-group">
                   <label for="pwd">Nom:</label>
-                  <input type="text" class="form-control" id="pwd" placeholder="Nom" name="NomE" required="">
+                  <input type="text" class="form-control" id="pwd" placeholder="Nom" name="NomE" required="" value ='<?php echo $NomE ?>'>
                 </div>
                 <div class="form-group">
                   <label for="pwd">Prénom:</label>
-                  <input type="text" class="form-control" id="pwd" placeholder="Prénom" name="PrenomE" required="">
+                  <input type="text" class="form-control" id="pwd" placeholder="Prénom" name="PrenomE" required="" value ='<?php echo $PrenomE ?>'>
                 </div>
                 <div class="form-group">
                   <label for="sel1">Formation:</label>
@@ -134,18 +181,18 @@ $Prenom= $_SESSION['Prenom'];
                     <option >Choisir une formation </option>
                     <?php             
                 for($i=0;$i<=count($resF)-1;$i++){
-            ?>
-                          <Option value ="<?php echo $resF[$i]['IdF'] ?>"><?php echo $resF[$i]['IntituleF'] ?></option>     
-            <?php
-                }
-            ?>
+                    ?>
+                          <Option <?php  if($resF[$i]['IdF'] == $IdF){ echo "Selected"; } ?> value ="<?php echo $resF[$i]['IdF'] ?>"><?php echo $resF[$i]['IntituleF'] ?></option>     
+                    <?php
+                        }
+                    ?>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="pwd">Mot de passe:</label>
-                  <input type="text" class="form-control" id="pwd" placeholder="Mot de passe" name="MdpE">
+                  <input type="text" class="form-control" id="pwd" placeholder="Mot de passe" name="MdpE" value ='<?php echo $MdpE ?>'>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Créer</button>
+                <button type="submit" class="btn btn-primary btn-block" value="<?php echo $action?>" name="action">Créer</button>
             </form>
           </div>
           <div class="col-sm-1"></div>
@@ -170,7 +217,7 @@ $Prenom= $_SESSION['Prenom'];
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
                 <br>
-                <form action="FonctionUtilisateur.php">
+                <form action="ActionUtilisateur.php">
                   <div class="form-group">
                     <label for="email">Numéro enseignants</label>
                     <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdEns" required="" value ='<?php echo $IdEns ?>'>
@@ -190,9 +237,12 @@ $Prenom= $_SESSION['Prenom'];
                   <div class="form-group">
                       <label for="email">Statut</label>
                       <select class="form-control" id="sel1" name ="Statut" required="">
-                          <option>Choisir Statut..</option>
                           <?php 
-                          if($TypeEns == "Enseignant"){ $selectEns= "Selected"; $selectInt =""; }else { $selectEns="" ; $selectInt ="Selected"; }?>
+                          if($TypeEns == "Enseignant"){ $selectEns= "Selected"; $selectInt ="";$Noselect =""; }else {   if($TypeEns == "Intervenant exterieur"){ $selectInt= "Selected"; $selectEns ="";$Noselect =""; }else { $selectEns="" ;$selectInt=""; $Noselect ="Selected"; }}
+                          ?> 
+                          <option <?php echo $Noselect ?>>Choisir Statut..</option>
+                          
+                          
                           <option value ="Enseignant" <?php echo $selectEns?>> Enseignant</option>
                           <option value ="Intervenant exterieur" <?php echo $selectInt?>>Intervenant exterieur</option>
                         </select>
@@ -204,15 +254,15 @@ $Prenom= $_SESSION['Prenom'];
                          <?php 
                           
                 for($i=0;$i<=count($resD)-1;$i++){
-            ?>
+                        ?>
                           
                           <Option <?php  if($resD[$i]['Intitule_domaine'] == $NomDomaine){ echo "Selected"; } ?> value ="<?php echo $resD[$i]['IdDomaine'] ?>"><?php echo $resD[$i]['Intitule_domaine'] ?></option>     
-            <?php
-                }
-            ?>
+                        <?php
+                            }
+                        ?>
                         </select>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block">Créer</button>                  
+                  <button type="submit" class="btn btn-primary btn-block" value="<?php echo $action?>" name="action">Créer</button>                  
                 </form>
             </div>
             <div class="col-sm-4"></div>
@@ -224,32 +274,33 @@ $Prenom= $_SESSION['Prenom'];
           <div class="col-sm-4"></div>
           <div class="col-sm-4">
               <br>
-              <form action="FonctionUtilisateur.php">
+              <form action="ActionUtilisateur.php">
                 <div class="form-group">
                   <label for="email">Numéro superUser</label>
-                  <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdA">
+                  <input type="text" class="form-control" id="email" placeholder="21575407..." name="IdA" value ='<?php echo $IdA ?>'>
                 </div>
                 <div class="form-group">
                     <label for="email">Nom</label>
-                    <input type="text" class="form-control" id="email" placeholder="Nom..." name="NomA">
+                    <input type="text" class="form-control" id="email" placeholder="Nom..." name="NomA" value ='<?php echo $NomA ?>'>
                 </div>
                 <div class="form-group">
                     <label for="email">Prénom</label>
-                    <input type="text" class="form-control" id="email" placeholder="Prénom..." name="PrenomA">
+                    <input type="text" class="form-control" id="email" placeholder="Prénom..." name="PrenomA" value ='<?php echo $PrenomA ?>'>
                 </div>
                 <div class="form-group">
                     <label for="email">Mot de passe</label>
-                    <input type="text" class="form-control" id="email" placeholder="mot de passe..." name="MdpA">
+                    <input type="text" class="form-control" id="email" placeholder="mot de passe..." name="MdpA" value ='<?php echo $MdpA ?>'>
                 </div> 
                 <div class="form-group">
                     <label for="email">Statut</label>
                     <select class="form-control" id="sel1" name ='StatutA' required >
-                        <option >Choisir Statut..</option>
-                        <option value ='Gestionnaire'>Gestionnaire</option>
-                        <option value ='Administrateur'>Administrateur</option>
+                       <?php if($StatutA == "Administrateur"){ $selectAd= "Selected"; $selectGe ="";$Noselect =""; }else {   if($StatutA == "Gestionnaire"){ $selectGe= "Selected"; $selectAd ="";$Noselect =""; }else { $selectAd="" ;$selectGe=""; $Noselect ="Selected"; }}?> 
+                        <option<?php echo $Noselect ?> >Choisir Statut..</option>
+                        <option <?php echo $selectGe ?> value ='Gestionnaire'>Gestionnaire</option>
+                        <option <?php echo $selectAd ?> value ='Administrateur'>Administrateur</option>
                       </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Créer</button>          
+                <button type="submit" class="btn btn-primary btn-block" value="<?php echo $action?>" name="action">Créer</button>          
                 
               </form>
           </div>
