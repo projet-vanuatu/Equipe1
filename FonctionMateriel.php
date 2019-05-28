@@ -72,7 +72,7 @@ function RecupererInfosMateriel($IdMat) {
 function ModifierMateriel($IdMat,$Type,$Etat,$IdS){
     $cx= ConnectDB();
     $ModifierMat ="UPDATE MATERIELS
-                   SET TypeMat ='$Type' , Etat_fonctionnement='$Etat', IdS='$IdS'
+                   SET TypeMat ='$Type' , Etat_fonctionnement='$Etat', IdS=$IdS
                    WHERE IdMat = '$IdMat'";
     $queryModifierMat = mysqli_query($cx,$ModifierMat);
     return "GestionMateriel.php";
@@ -88,4 +88,17 @@ function RecupererInfosMateriel1($IdMat) {
     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $res;
 }
+
+//Supprimer un matériel
+
+function SupprimerMateriel($IdMat){
+     $cx= ConnectDB();
+     $SupprimerMat = "DELETE FROM MATERIELS WHERE IdMat='$IdMat'";
+     $querySupprimerMat = mysqli_query($cx,$SupprimerMat);
+     return "GestionMateriel.php";
+     
+}
+    
+
+
 ?> 

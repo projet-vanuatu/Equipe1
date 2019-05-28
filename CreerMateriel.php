@@ -150,8 +150,8 @@ $equipe=['equipe'];
                 
                 <div class="form-group">
                <label for="sel1"> Equipé dans la salle (optionnel):</label>
-               <select class="form-control" id="sel1" name ='Salle'>
-                 <option>Choisir la salle </option>
+               <select class="form-control" id="sel1" name ='Salle' required>
+                 <option value ='NULL'>Choisir la salle </option>
                  <?php             
                 for($i=0;$i<=count($resMateriel)-1;$i++){
                 ?>

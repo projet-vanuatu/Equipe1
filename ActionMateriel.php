@@ -27,4 +27,12 @@ if($action =='modifier'){
         }
 }
 
+if($action =='supprimer'){
+      if(!empty($_GET['IdMat'])){
+        $IdMat =$_GET['IdMat'];
+        $SupprimerMateriel = SupprimerMateriel($IdMat);
+        header('Location:'.$SupprimerMateriel);
+
+        }
+}
 ?>

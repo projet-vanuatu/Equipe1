@@ -69,11 +69,17 @@ $resListMat2 =  AfficherMateriel1();
         ?></button>
             </div>
         </div>
+        <br>
+        <br>
 
-       
-            <div class="container" >
-            <ul class="nav nav-tabs">
-                    <li class="nav-item">
+       <div class="container">
+              <br>
+              <center><h4 >Gestion du matériel :</h4><center>
+            <br>
+        </div>
+            <div class="container" style="color: #352109 ;"  >
+            <ul class="nav nav-tabs" >
+                    <li class="nav-item" >
                         <a class="nav-link acstive " onclick="afficherMaterielEquipe();">Matériel équipé dans une salle</a>
                     </li>
                     <li class="nav-item">
@@ -82,11 +88,8 @@ $resListMat2 =  AfficherMateriel1();
                   
             </ul>
         </div>
-            <div class="container">
-              <br>
-              <center><h4>Gestion du matériel :</h4><center>
             <br>
-        </div>
+        <br>
         <div class="container" id="etudiants" style="display:block;">
             <div class="row">
                 <div class="col-sm-8">
@@ -123,7 +126,7 @@ $resListMat2 =  AfficherMateriel1();
                             <td><?php echo  $resListMat[$i]['NomS'] ?></td>
                             <td><?php echo  $resListMat[$i]['NomSITE'] ?></td>
                             <td><p><a href =  "<?php echo "CreerMateriel.php?equipe=Oui&action=modifier&IdMat=".$resListMat[$i]['IdMat']; ?>"> <button type="button" class="btn btn-warning">Modifier</button></a>
-                                    <a href ="<?php echo "ActionMateriel.php?IdMatSupp=".$resListMat[$i]['IdMat']?>"> <button type="button" class="btn btn-danger">Supprimer</button></a></p></td>
+                                    <a href ="<?php echo "ActionMateriel.php?action=supprimer&IdMat=".$resListMat[$i]['IdMat']?>"> <button type="button" class="btn btn-danger">Supprimer</button></a></p></td>
                         </tr
             <?php
                 }
@@ -169,7 +172,7 @@ $resListMat2 =  AfficherMateriel1();
                             <td><?php echo  $resListMat2[$i]['Etat_fonctionnement'] ?></td>
                            
                             <td><p><a href =  "<?php echo "CreerMateriel.php?equipe=Non&action=modifier&IdMat=".$resListMat2[$i]['IdMat']; ?>"> <button type="button" class="btn btn-warning">Modifier</button></a>
-                                    <a href ="<?php echo "ActionMateriel.php?IdMatSupp=".$resListMat2[$i]['IdMat']?>"> <button type="button" class="btn btn-danger">Supprimer</button></a></p></td>
+                                    <a href ="<?php echo "ActionMateriel.php?action=supprimer&IdMat=".$resListMat2[$i]['IdMat']?>"> <button type="button" class="btn btn-danger">Supprimer</button></a></p></td>
                         </tr>
             <?php
                 }
