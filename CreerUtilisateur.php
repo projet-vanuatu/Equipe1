@@ -2,6 +2,8 @@
 require('FonctionUtilisateur.php');
 $resD = RecupererLesNomDeDomaines();
 $resF = RecupererNomFormation();
+ require('actionTest.php');
+ $errtxt = "Tstettd";
 
 // Récupération du nom de la personne connectée
 $Nom = $_SESSION['Nom'];
@@ -74,7 +76,8 @@ if(isset($_GET['IdAdModif'])){
         $MdpA=  "";
         $StatutA= "";
        
-    }   
+    }  
+    
 ?>
 
 

@@ -71,7 +71,8 @@ function RecupererIdGCM($IdF){
     return $res['IdGCM'];
 }
 
-function InsererEtudiant ($MdpE,$IdE,$NomE,$PrenomE,$IdF) {   
+function InsererEtudiant ($MdpE,$IdE,$NomE,$PrenomE,$IdF) {
+    require_once 'actionTest.php';
     $cx = ConnectDB();
     $InsererMdp ="INSERT INTO CODES (IdMdp, Mdp) VALUES (NULL, '$MdpE');";
     $queryInsererMdp = mysqli_query($cx,$InsererMdp);
@@ -80,6 +81,7 @@ function InsererEtudiant ($MdpE,$IdE,$NomE,$PrenomE,$IdF) {
         $IdGCM = RecupererIdGCM($IdF);
         $InsererEtudiant = "INSERT INTO ETUDIANT (IdE ,NomE, PrenomE,IdGCM,IdF,IdMdp) values ('$IdE','$NomE','$PrenomE','$IdGCM','$IdF','$IdMdpE')";
         $queryInsererEtudiant = mysqli_query($cx,$InsererEtudiant);
+        ecrire_log('lool');
         return "CreerUtilisateur.php?action=creer";
     }
 }

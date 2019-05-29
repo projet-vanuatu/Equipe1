@@ -21,6 +21,7 @@ $resListMat2 =  AfficherMateriel1();
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="style.css" type ='text/css'>
         <script src="javascript.js"></script>
+        <script type="text/javascript" src="newjavascript.js"></script>
         <title>Title of the document</title>
     </head>
     <body>
@@ -141,7 +142,7 @@ $resListMat2 =  AfficherMateriel1();
             <div class="container" id="enseignants" style="display:none;">
             <div class="row">
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="myInput" onkeyup="myFunction();" placeholder="Rechercher.." title="">
+                    <input type="text" class="form-control" id="myInput2" onkeyup="myFunction();" placeholder="Rechercher.." title="">
                 </div>
                 <div class="col-sm-4">
                     <a href = "CreerMateriel.php?action=creer"><button type="button" class="btn btn-primary">Créer matériel</button></a>
@@ -151,7 +152,7 @@ $resListMat2 =  AfficherMateriel1();
             <br>
              
             <div class="table-wrapper-scroll-y my-custom-scrollbar" >
-                <table class="table table-hover" id="myTable">
+                <table class="table table-hover" id="myTable2">
                     <thead class="header">
                         <tr>
                             <th>Identifiant</th>
@@ -185,14 +186,7 @@ $resListMat2 =  AfficherMateriel1();
             </div>
         </div>
  <script>
-            $(document).ready(function(){
-            $("#myInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-            });
+
             function afficherMaterielEquipe(){
                 document.getElementById("etudiants").style.display = "block";
                 document.getElementById("enseignants").style.display = "none";
