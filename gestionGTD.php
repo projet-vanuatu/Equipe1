@@ -48,6 +48,43 @@ $IdGTDs = $_SESSION['IdGTD'];
    } 
 }
 
+if(!empty($_GET['IdE'])){
+    
+     $IdFs = $_SESSION['IdF'];
+    $IdGTDs =  $_SESSION['IdGTD'];
+     $LisGroupeEtu = ListGroupeEtu($IdGTDs);
+    $resListEtu = AfficherListEtudiant($IdFs);
+    $resListGroupeTD = ListGroupeTD($IdFs);
+    $Selected = "Selected";
+     if(!empty($IdGDT)){
+$IdGTDs = $_SESSION['IdGTD'];
+   }else{
+       $IdFGTDs ="";
+   } 
+   $IdE = $_GET['IdE'];
+}else {
+     $IdFGTDs ="";
+     $IdE = "" ;
+}
+
+if(!empty($_GET['IdEsupp'])){
+    
+     $IdFs = $_SESSION['IdF'];
+    $IdGTDs =  $_SESSION['IdGTD'];
+     $LisGroupeEtu = ListGroupeEtu($IdGTDs);
+    $resListEtu = AfficherListEtudiant($IdFs);
+    $resListGroupeTD = ListGroupeTD($IdFs);
+    $Selected = "Selected";
+     if(!empty($IdGDT)){
+$IdGTDs = $_SESSION['IdGTD'];
+   }else{
+       $IdFGTDs ="";
+   } 
+   $IdESupp = $_GET['IdEsupp'];
+}else {
+     $IdFGTDs ="";
+     $IdESupp = "" ;
+}
 ?>
 
 <html lang="fr">
@@ -121,26 +158,27 @@ $IdGTDs = $_SESSION['IdGTD'];
         <div class="row content">
 
           <div class="col-sm-5 sidenav"> 
+              <form action ="gestionGTD.php">
                <label for="sel1">Liste des étudiants non affecctés à un groupe de TD :</label>
               
-              <select multiple class="form-control" id="sel1" style="height:450px;"  >
+              <select multiple class="form-control" id="sel1" style="height:450px;" name ="IdE" onchange="this.form.submit()">
                  <?php
                for($i=0;$i<=count($resListEtu)-1;$i++){
                 ?>
-                          <Option value ="<?php echo $resListEtu[$i]['IdE']?>">
+                          <Option <?php if($IdE == $resListEtu[$i]['IdE']){echo "Selected";} ?> value ="<?php echo $resListEtu[$i]['IdE']?>">
                               <?php echo $resListEtu[$i]['IdE']." ".$resListEtu[$i]['NomE']." ".$resListEtu[$i]['PrenomE']?>
                           </option>     
                 <?php
                     }
                 ?> 
               </select>
-            
+              </form>
           </div>
         
           <div class="col-sm-2 sidenav">
             <div style="margin-top:80%; margin-left:30%; padding:10px;">
-              <p><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span></button></p>
-              <p><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span></button></p>
+                <p><a href ='actionGestionGTD.php?IdFs=<?php echo $IdFs?>&IdGTD=<?php echo $IdGTDs?>&NumEtuSupp=<?php echo $IdESupp ?>' ><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left" ></span></button></a></p>
+              <p><a href ='actionGestionGTD.php?IdFs=<?php echo $IdFs?>&IdGTD=<?php echo $IdGTDs?>&NumEtu=<?php echo $IdE ?>'><button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-arrow-right"></span></button></a></p>
             </div>
           </div>
         
@@ -162,17 +200,17 @@ $IdGTDs = $_SESSION['IdGTD'];
             </select>
             
           </form>
-           
-            <select multiple class="form-control" id="sel1" style="height:400px;">
+            <form action ="gestionGTD.php">
+            <select multiple class="form-control" id="sel1" style="height:400px;" name='IdEsupp' onchange="this.form.submit()">
               <?php
                for($i=0;$i<=count($LisGroupeEtu)-1;$i++){
                 ?>
-                          <Option value ="<?php echo $LisGroupeEtu[$i]['IdE']?>"><?php echo $LisGroupeEtu[$i]['IdE']." ".$LisGroupeEtu[$i]['NomE']." ".$LisGroupeEtu[$i]['PrenomE']?></option>     
+                          <Option <?php if($IdESupp == $LisGroupeEtu[$i]['IdE']){echo "Selected";}?> value ="<?php echo $LisGroupeEtu[$i]['IdE']?>"><?php echo $LisGroupeEtu[$i]['IdE']." ".$LisGroupeEtu[$i]['NomE']." ".$LisGroupeEtu[$i]['PrenomE']?></option>     
                 <?php
                     }
                 ?> 
             </select>
-           
+            </form>
           </div>
         </div>
 

@@ -67,4 +67,19 @@ function ListGroupeEtu($IdGTD){
     return $res;
 }
 
+function AjouterEtudiantGroupeTD($IdE,$IdGTD,$IdF){
+    $cx = ConnectDB();
+    $sql = "INSERT INTO APPARTIENT (IdGTD,IdE) Value ('$IdGTD','$IdE')";
+    $querysql = mysqli_query($cx,$sql);
+   
+    return "gestionGTD.php?IdF=$IdF&IdGTD=$IdGTD";
+}
+
+function EnleverEtudiantGroupeTD($IdE,$IdGTD,$IdF){
+    $cx = ConnectDB();
+    $sql = "DELETE FROM APPARTIENT WHERE IdGTD ='$IdGTD' AND IdE='$IdE'";
+    $querysql = mysqli_query($cx,$sql);
+   
+    return "gestionGTD.php?IdF=$IdF&IdGTD=$IdGTD";
+}
 ?>

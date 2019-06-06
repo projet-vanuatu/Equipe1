@@ -9,7 +9,7 @@ $Prenom= $_SESSION['Prenom'];
 
 $action =$_GET['action'];
 $equipe=['equipe'];
- if(isset($_GET['IdMat'])&&$_GET['equipe']=='Oui'){
+if(isset($_GET['IdMat'])&&$_GET['equipe']=='Oui'){
      $IdMat= $_GET['IdMat'];
      $resinfo= RecupererInfosMateriel($IdMat);
      
@@ -20,27 +20,22 @@ $equipe=['equipe'];
         $IdS=$resinfo[$i]['IdS'];
        
      }
-      
+} elseif (isset($_GET['IdMat'])&&$_GET['equipe']=='Non') {
+     $IdMat= $_GET['IdMat'];
+ $resinfo1= RecupererInfosMateriel1($IdMat);
 
-    } elseif (isset($_GET['IdMat'])&&$_GET['equipe']=='Non') {
-         $IdMat= $_GET['IdMat'];
-     $resinfo1= RecupererInfosMateriel1($IdMat);
-     
-     for($i=0;$i<=count($resinfo1)-1;$i++){
+    for($i=0;$i<=count($resinfo1)-1;$i++){
 
-        $TypeMat= $resinfo1[$i]['TypeMat'];
-        $Etat_fonctionnement= $resinfo1[$i]['Etat_fonctionnement'];
-        $IdS="NULL";
-      
-       
-     }
-        
-    }else {
-        
-        $TypeMat= "";
-        $Etat_fonctionnement= "";
-        $IdS="";
-    } 
+       $TypeMat= $resinfo1[$i]['TypeMat'];
+       $Etat_fonctionnement= $resinfo1[$i]['Etat_fonctionnement'];
+       $IdS="NULL";
+    }
+}else {
+
+    $TypeMat= "";
+    $Etat_fonctionnement= "";
+    $IdS="";
+} 
 ?>
 
 <html lang="en">
