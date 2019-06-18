@@ -1,7 +1,7 @@
-  <?php
-  session_start();
+<?php
+ session_start();
   $Nom=$_SESSION['Nom'];
-  $Prenom = $_SESSION['Prenom']; 
+  $Prenom = $_SESSION['Prenom'];
 
   ?>
 
@@ -25,31 +25,32 @@
 
     <body class="bg-global">
        <div class="myNavbar">
-          <div class="navbar-brand" style="float:left;">
+          <div  style="float:left;">
               
     <img   src="logo.JPG" alt="Logo" style="width:52px;">
   
              
           </div>
-          <a href="homeGestionnaire.php">Accueil</a>
-          <a href="GestionPlanning.php">Gestion du planning</a>
-          <a href="gestionGTD.php">Gestion groupes TD</a>
-          <a href="gestionReservation.php">Réservations matériels</a>
+          <a href="homeEtu.php">Accueil</a>
+          <a href="consulterPlanningEns.php">Planning personnel</a>
+             <a href="">Mes reservations</a>
+          <a href="">Liste des étudiants</a>
           <div class="subnav">
               <button class="subnavbtn">Consulter planning &nbsp;<i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                  <a href="#company">Par formation</a>
-                  <a href="#company">Par salle</a>
-                  <a href="#company">Par enseignant</a>
+                  <a href="planningFormEns.php">Par formation</a>
+                  <a href="planningSalleEns.php">Par salle</a>
+                  
               </div>
             </div>
             <div class="subnav2">
-                <a href = "index.html" class="subnavbtn2">Deconnection&nbsp;<span class="glyphicon glyphicon-log-in"></span></a>
+                <a href = "index.php" class="subnavbtn2">Deconnection&nbsp;<span class="glyphicon glyphicon-log-in"></span></a>
             </div>
             <div class="subnav2">
-                <button class="subnavbtn3"><span class="glyphicon glyphicon-user"></span>&nbsp<?php echo $Nom;?>&nbsp<?php echo $Prenom?> </button>
+                <button class="subnavbtn3"><span class="glyphicon glyphicon-user"></span>&nbsp<?php echo $Nom; ?>&nbsp<?php echo $Prenom ?> </button>
             </div>
       </div>
         <footer class="container-fluid"></footer>
     </body>
 </html>
+

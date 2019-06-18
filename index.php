@@ -1,6 +1,6 @@
 
     <?php
-    require('fonction_connexion.php');
+    require('connexion.php');
    
 
 
