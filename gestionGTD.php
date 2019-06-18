@@ -201,7 +201,8 @@ $IdGTDs = $_SESSION['IdGTD'];
             
           </form>
             <form action ="gestionGTD.php">
-            <select multiple class="form-control" id="sel1" style="height:400px;" name='IdEsupp' onchange="this.form.submit()">
+            <select multiple class="form-control" id="sel1" style="height:400px;" name='IdEsupp' 
+                    ">
               <?php
                for($i=0;$i<=count($LisGroupeEtu)-1;$i++){
                 ?>
